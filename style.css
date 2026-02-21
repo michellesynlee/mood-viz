@@ -5,7 +5,7 @@ body {
   color: #111;
   transition: background-color 1.2s ease;
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 body.ocean {
@@ -26,7 +26,7 @@ body.pink {
 }
 
 .text {
-  max-width: 750px;
+  max-width: 650px;
   text-align: center;
   margin-top: 40px;
 }

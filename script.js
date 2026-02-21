@@ -48,6 +48,10 @@ function createJanuaryWaves(data) {
 
   const baseCenter = height / 2;
 
+  // 🎨 COLOR SCALE (low = dark, high = light)
+  const colorScale = d3.scaleSequential(d3.interpolateBlues)
+    .domain([10, 0]); // reversed so low = dark
+
   weeks.forEach((week, i) => {
 
     const baseline = baseCenter + (i - 1.5) * 120;
@@ -74,6 +78,7 @@ function createJanuaryWaves(data) {
 
     wavePaths.push(path);
 
+    // 🔵 DOTS — color based on score value
     const dots = svg.selectAll(`.dot-${i}`)
       .data(week)
       .enter()
@@ -83,17 +88,9 @@ function createJanuaryWaves(data) {
         baseline - amplitudeScale(d["overall-positive-day-score"]) / 2
       )
       .attr("r", 7)
-      .attr("fill", (d, index) => {
-
-        if (index === 0) return "#9ecae1";
-
-        const prev = week[index - 1]["overall-positive-day-score"];
-        const curr = d["overall-positive-day-score"];
-
-        if (curr > prev) return "#deebf7";
-        if (curr < prev) return "#08519c";
-        return "#6baed6";
-      })
+      .attr("fill", d =>
+        colorScale(d["overall-positive-day-score"])
+      )
       .attr("opacity", 0);
 
     dotGroups.push(dots);
@@ -139,7 +136,6 @@ function setupScrollAnimation() {
           document.body.classList.remove("pink");
           document.body.classList.add("ocean");
 
-          // 🌊 Animate waves (only once)
           if (!wavesAnimated) {
             wavesAnimated = true;
 
