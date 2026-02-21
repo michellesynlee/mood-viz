@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mood Tracker</title>
+
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="tooltip"></div>
+  <!-- intro -->
+  <section class="panel intro">
+    <div class="text">
+      <h1>my 2026 mood tracker</h1>
+      <p>
+        i have been tracking my mood every day since the start of 2026. 
+        i realized that there were patterns in my mood shifts, and i wanted
+        to visualize them in a way that was more fun than just words on a notebook. 
+        <br><br>
+        i have been adding a visualization every month, so check back at the end of each month to see the new visualizations!
+      </p>
+    </div>
+  </section>
+
+  <!-- jan -->
+  <section class="panel january">
+    <div class="text">
+      <h2>january</h2>
+      <p>i found january to quite literally have the ups and downs of waves, which is what inspired this visualization.
+        like clockwork, every 2-4 days i found my mood shifting from a high to a low, and then back up again.
+        hover over the dots on the waves to see more detail...
+      </p>
+    </div>
+
+    <div id="jan-viz" class="viz"></div>
+  </section>
+
+  <!-- feb -->
+  <section class="panel february">
+    <div class="text">
+      <h2>february</h2>
+      <p>check again closer to march :)</p>
+    </div>
+
+    <div id="feb-viz" class="viz"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
