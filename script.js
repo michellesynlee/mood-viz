@@ -123,6 +123,7 @@ function setupScrollAnimation() {
 
   const januarySection = document.querySelector(".january");
   const februarySection = document.querySelector(".february");
+  const marchSection = document.querySelector(".march");
 
   const observer = new IntersectionObserver((entries) => {
 
@@ -130,10 +131,10 @@ function setupScrollAnimation() {
 
       if (entry.isIntersecting) {
 
-        // JANUARY
+        // 🌊 JANUARY
         if (entry.target.classList.contains("january")) {
 
-          document.body.classList.remove("pink");
+          document.body.classList.remove("pink", "march");
           document.body.classList.add("ocean");
 
           if (!wavesAnimated) {
@@ -159,8 +160,17 @@ function setupScrollAnimation() {
 
         // FEBRUARY
         if (entry.target.classList.contains("february")) {
-          document.body.classList.remove("ocean");
+          document.body.classList.remove("ocean", "march");
           document.body.classList.add("pink");
+          startBubbles();
+        } else {
+          stopBubbles();
+        }
+
+        // MARCH
+        if (entry.target.classList.contains("march")) {
+          document.body.classList.remove("ocean", "pink");
+          document.body.classList.add("march");
         }
 
       } else {
@@ -173,6 +183,10 @@ function setupScrollAnimation() {
           document.body.classList.remove("pink");
         }
 
+        if (entry.target.classList.contains("march")) {
+          document.body.classList.remove("march");
+        }
+
       }
 
     });
@@ -181,12 +195,76 @@ function setupScrollAnimation() {
 
   observer.observe(januarySection);
   observer.observe(februarySection);
+  observer.observe(marchSection);
 }
 
-
-// 🌈 Rainbow fade-in on load
+// into pic fade-in on load
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.querySelector(".intro").classList.add("rainbow-visible");
   }, 200);
 });
+
+//jellyfish animation for february section
+
+const febSection = document.querySelector(".february");
+const marchSection = document.querySelector(".march");
+
+window.addEventListener("scroll", () => {
+  const febRect = febSection.getBoundingClientRect();
+  const marchRect = marchSection.getBoundingClientRect();
+
+  const windowHeight = window.innerHeight;
+
+  // If February is in view
+  if (febRect.top < windowHeight * 0.6 && febRect.bottom > 0) {
+    febSection.classList.add("active");
+    febSection.classList.remove("exit");
+  }
+
+  // If March enters view
+  if (marchRect.top < windowHeight * 0.6) {
+    febSection.classList.remove("active");
+    febSection.classList.add("exit");
+  }
+});
+
+
+//bubble animation for february section
+
+const bubbleContainer = document.querySelector(".bubble-container");
+let bubbleInterval = null;
+
+function createBubble() {
+  const bubble = document.createElement("img");
+  bubble.src = "bubble.png";
+  bubble.classList.add("bubble");
+
+  const size = Math.random() * 30 + 15;
+  bubble.style.width = size + "px";
+
+  bubble.style.left = Math.random() * window.innerWidth + "px";
+
+  const duration = Math.random() * 5 + 6;
+  bubble.style.animationDuration = duration + "s";
+
+  bubbleContainer.appendChild(bubble);
+
+  setTimeout(() => {
+    bubble.remove();
+  }, duration * 1000);
+}
+
+function startBubbles() {
+  if (!bubbleInterval) {
+    bubbleInterval = setInterval(createBubble, 400);
+  }
+}
+
+function stopBubbles() {
+  clearInterval(bubbleInterval);
+  bubbleInterval = null;
+
+  // remove any existing bubbles immediately
+  bubbleContainer.innerHTML = "";
+}

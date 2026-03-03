@@ -13,7 +13,11 @@ body.ocean {
 }
 
 body.pink {
-  background-color: #f8d6e8;   
+  background-color: #64a9ce; 
+}
+
+body.march {
+  background-color: #397ea4; 
 }
 
 .panel {
@@ -31,6 +35,12 @@ body.pink {
   margin-top: 55px;
 }
 
+.feb-text{
+  max-width: 1500px;
+  text-align: center;
+  margin-top: 55px;
+}
+
 .intro {
   position: relative;
   min-height: 90vh;
@@ -41,14 +51,14 @@ body.pink {
   content: "";
   position: absolute;
 
-  top: 0px;
+  top: 200px;
   left: 50%;
   transform: translateX(-50%) translateY(5%) scale(1.2);
 
-  width: 1400px;
-  height: 900px;
+  width: 800px;
+  height: 500px;
 
-  background-image: url("rainbow.png");
+  background-image: url("mountains.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -56,12 +66,12 @@ body.pink {
   opacity: 0;                    /* start hidden */
   transition: opacity 2s ease;   /* smooth fade */
 
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
 .intro.rainbow-visible::before {
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
 /*
@@ -78,6 +88,10 @@ body.pink {
   }
 }
   */
+
+.january {
+  margin-top: 200px;
+}
 
 .viz {
   width: 100%;
@@ -106,4 +120,105 @@ body.pink {
   opacity: 0;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   transition: opacity 0.2s ease;
+}
+
+
+/* FEBURARY CSS, jellyfish and stuff */
+
+.february {
+  position: relative;
+  overflow: hidden;
+  padding-top: 300px;
+}
+
+.jelly-container {
+  position: relative;
+  height: 2000px;
+  margin-top: 30px;
+}
+
+.jelly {
+  position: absolute;
+  width: 360px;
+  opacity: 0;
+  transform: translateY(300px);
+  transition: transform 1.5s ease, opacity 1.5s ease;
+}
+
+/* Spread them out vertically + horizontally */
+.jelly1 { left: -700px;  top: 20px; }
+.jelly2 { left: -420px;  top: 140px; }
+.jelly3 { left: -50px;  top: 100px; }
+.jelly4 { left: 350px;  top: 20px; }
+
+/* When February is active */
+
+.february.active .jelly {
+  opacity: 1;
+  transform: translateY(0px);
+  animation: drift 4s ease-in-out infinite alternate;
+}
+
+/* When scrolling past February */
+
+.february.exit .jelly {
+  animation: floatAway 2s ease forwards;
+}
+
+/* Gentle floating while visible */
+@keyframes drift {
+  0% {
+    transform: translateY(0px) translateX(-10px);
+  }
+  100% {
+    transform: translateY(-20px) translateX(10px);
+  }
+}
+
+/* Float upward when leaving */
+@keyframes floatAway {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-300px);
+  }
+}
+
+/* ===================== */
+/* BUBBLE SYSTEM */
+/* ===================== */
+
+.bubble-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  opacity: 0.6;
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
 }
