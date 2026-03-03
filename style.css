@@ -55,8 +55,8 @@ body.march {
   left: 50%;
   transform: translateX(-50%) translateY(5%) scale(1.2);
 
-  width: 800px;
-  height: 500px;
+  width: 900px;
+  height: 600px;
 
   background-image: url("mountains.jpg");
   background-size: contain;
